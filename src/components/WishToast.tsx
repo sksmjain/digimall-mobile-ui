@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Heart } from "lucide-react";
 
 export type WishToastPayload = {
+  id?: string | number;
   title: string;
   image: string;
 };
