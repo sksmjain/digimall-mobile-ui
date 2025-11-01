@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
     <PhoneFrame screenBg="bg-neutral-50">
       {/* Your mobile app content goes here */}
-      <div className="p-2">
+      <div className="p-4">
           <Routes>
             <Route path="/" element={<StorePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
