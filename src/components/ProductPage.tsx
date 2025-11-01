@@ -33,7 +33,6 @@ export default function ProductPage() {
   const [activeSize, setActiveSize] = useState(1);
 
   const ref = useRef<HTMLDivElement>(null);
-  const { state } = useLocation() as { state?: any };
 
   // 🍎 WishToast state
   const [toastItem, setToastItem] = React.useState<WishToastPayload | null>(null);
