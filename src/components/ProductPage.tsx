@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Heart, MoreHorizontal, Star, Link2 } from "lucide-react";
 import ProductGallery from "./ProductGallery";
+import { useLocation } from "react-router-dom";
 
 interface ColorOption {
   id: number;
@@ -37,6 +38,21 @@ export default function ProductPage() {
   const [activeColor, setActiveColor] = useState(1);
   const [activeSize, setActiveSize] = useState(1);
 
+  const ref = useRef<HTMLDivElement>(null);
+  const { state } = useLocation() as { state?: any };
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(2px)";
+    el.style.transition = "opacity .18s ease, transform .18s ease";
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+    });
+  }, []);
+
   const images = [
   "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Crimson.jpg?v=1718878184&width=1500",
   "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_97e5fbbe-690f-4fdf-8df2-a1e01cf4bc9b.jpg?v=1718878307&width=1500",
@@ -45,7 +61,7 @@ export default function ProductPage() {
     ];
 
   return (
-    <div className="flex flex-col gap-4 p-2">
+    <div ref={ref} className="flex flex-col gap-4 p-4">
       {/* Top Store Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">

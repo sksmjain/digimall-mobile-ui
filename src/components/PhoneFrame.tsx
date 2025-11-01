@@ -32,7 +32,7 @@ type PhoneFrameProps = {
           {/* Bezel */}
           <div className="relative h-full w-full rounded-[2.6rem] bg-black/80 p-1">
             {/* Screen */}
-            <div className={`relative h-full w-full ${screenBg} rounded-[2.2rem] overflow-hidden`}>
+            <div className={`relative h-full w-full ${screenBg} rounded-[2.2rem] overflow-hidden`} data-phone-root>
               {/* Dynamic Island / notch */}
               <div className="absolute left-1/2 -translate-x-1/2 top-2 h-8 w-40 rounded-full bg-black/90" />
               {/* Screen content (safe areas) */}

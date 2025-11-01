@@ -1,3 +1,5 @@
+import React from "react";
+
 interface ButtonProps {
     label?: string; // now optional
     children?: React.ReactNode; // allow icons / custom content
