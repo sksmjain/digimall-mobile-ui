@@ -1,0 +1,297 @@
+/* 1) Tailwind first so its layers/utilities are registered correctly */
+@import "tailwindcss";
+
+/* 2) Optional: third-party animations (after Tailwind is fine in v4) */
+@import "tw-animate-css";
+
+/* 3) Variants (kept) */
+@custom-variant dark (&:is(.dark *));
+
+/* 4) Design tokens (OKLCH). Avoid setting raw color/bg here. */
+:root {
+  color-scheme: light;
+  --radius: 0.625rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* 5) Dark tokens */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.704 0.191 22.216);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* 6) Map tokens to Tailwind color names (inline theme) */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* 7) Base layer (resets + typography) */
+@layer base {
+  html, body {
+    @apply min-h-screen;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Keep link defaults, but let utilities override */
+  a { font-weight: 500; color: #646cff; text-decoration: inherit; }
+  a:hover { color: #535bf2; }
+
+  h1 { font-size: 3.2em; line-height: 1.1; }
+
+  /* IMPORTANT: do not force padding/bg on all buttons */
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font: inherit;
+    cursor: pointer;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  /* Optional: light scheme tweaks without overriding component backgrounds */
+  @media (prefers-color-scheme: light) {
+    :root { /* no raw bg/text here to avoid fighting Tailwind */ }
+    a:hover { color: #747bff; }
+  }
+}
+
+/* 8) Components (your design system) */
+@layer components {
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 
+           rounded-lg px-4 py-2 text-sm font-medium
+           text-foreground bg-secondary border border-border
+           transition-colors select-none
+           focus:outline-none focus:ring-2 focus:ring-ring/50
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn:hover { @apply bg-secondary/90; }
+
+  .btn-primary {
+    color: var(--primary-foreground);
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+  .btn-primary:hover { @apply brightness-95; }
+
+  .btn-ghost { @apply bg-transparent border-transparent text-foreground/70; }
+  .btn-ghost:hover { @apply bg-foreground/5 text-foreground; }
+
+  .btn-outline { @apply bg-transparent text-foreground border-border; }
+  .btn-outline:hover { @apply bg-foreground/5; }
+
+  .btn-destructive {
+    color: var(--primary-foreground);
+    background: var(--destructive);
+    border-color: var(--destructive);
+  }
+  .btn-destructive:hover { @apply brightness-95; }
+
+  /* Text-only button */
+  /* Text button base */
+  .btn-text {
+    @apply bg-transparent border-none text-foreground/70 font-medium
+          px-0 py-0 leading-tight;
+  }
+
+  /* Hover */
+  .btn-text:hover {
+    @apply text-foreground;
+  }
+
+  /* ✅ Prevent active state from adding BG / ring */
+  .btn-text.btn-active {
+    @apply bg-transparent text-foreground font-semibold ring-0;
+  }
+
+  .btn-text:disabled {
+    @apply opacity-40 pointer-events-none;
+  }
+
+  /* sizes */
+  .btn-xs { @apply h-7 px-2 text-xs rounded-md; }
+  .btn-sm { @apply h-8 px-3 text-sm rounded-md; }
+  .btn-md { @apply h-10 px-4 text-sm rounded-lg; }
+  .btn-lg { @apply h-11 px-5 text-base rounded-lg; }
+  .btn-pill { @apply rounded-full; }
+
+  /* Active / Selected */
+  .btn-active { @apply bg-black text-white ring-2 ring-ring/50; }
+  .btn-active:hover { @apply bg-black/95; }
+
+  .btn-primary.btn-active {
+    @apply bg-[var(--primary)] text-[var(--primary-foreground)] ring-2 ring-ring/50;
+  }
+  .btn-primary.btn-active:hover { @apply brightness-95; }
+
+  /* ---------- Pills ---------- */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1.5 
+           text-sm font-medium bg-white text-black/60 border border-black/10
+           transition-colors hover:text-black;
+  }
+  .pill-active { @apply text-black bg-white; }
+  .pill-active:hover { @apply bg-white/95; }
+
+  /* ---------- Badges ---------- */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium
+           bg-muted text-muted-foreground;
+  }
+  .badge-primary {
+    color: var(--primary-foreground);
+    background: color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+
+  /* ---------- Inputs ---------- */
+  .input {
+    @apply w-full h-10 rounded-lg px-3 text-sm
+           bg-background border border-input text-foreground
+           placeholder:text-foreground/50
+           focus:outline-none focus:ring-2 focus:ring-ring/50;
+  }
+  .input-pill { @apply rounded-full h-11 px-4; }
+
+  /* ---------- Cards ---------- */
+  .card { @apply rounded-2xl border border-border bg-card text-card-foreground shadow-sm; }
+  .card-body { @apply p-4; }
+  .card-hover { @apply transition-shadow hover:shadow-md; }
+
+  /* ---------- Chips ---------- */
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs
+           bg-foreground/5 text-foreground/80 border border-border;
+  }
+  .chip-close { @apply ml-1 inline-grid place-items-center h-4 w-4 rounded-full hover:bg-foreground/10; }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar { @apply flex items-center gap-2 rounded-xl border border-border bg-card px-2 py-2; }
+
+  /* ---------- Helpers ---------- */
+  .ring-focus { @apply focus:outline-none focus:ring-2 focus:ring-ring/50; }
+}
