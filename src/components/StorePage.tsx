@@ -5,6 +5,7 @@ import StoreHero from "./StoreHero";
 import StoreProducts, { type StoreProduct } from "./StoreProducts";
 
 export default function StorePage() {
+
     const sections = [
         {
           title: "Men's Fall Collection",

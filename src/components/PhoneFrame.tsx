@@ -17,7 +17,7 @@ function useIsDesktop(mdPx: number = 768) {
     if (typeof window === "undefined") return;
     const mql = window.matchMedia(`(min-width: ${mdPx}px)`);
     const onChange = () => setDesk(mql.matches);
-    onChange(); // sync initial
+    onChange();
     mql.addEventListener?.("change", onChange);
     return () => mql.removeEventListener?.("change", onChange);
   }, [mdPx]);
@@ -31,12 +31,12 @@ export default function PhoneFrame({
   screenBg = "bg-white",
 }: PhoneFrameProps) {
   const { pathname } = useLocation();
-  const isDesktop = useIsDesktop(); // ✅ ensures only one branch renders
+  const isDesktop = useIsDesktop();
   const [tab, setTab] = useState<"home" | "orders" | "profile">("home");
 
   return (
     <div className={`min-h-screen w-full ${className}`}>
-      {/** ---------- MOBILE: full-screen app (no bezel) ---------- */}
+      {/* ---------- MOBILE: full-screen app (no bezel) ---------- */}
       {!isDesktop && (
         <div className="relative min-h-screen">
           <div
@@ -44,7 +44,7 @@ export default function PhoneFrame({
             data-phone-root
             className={`relative min-h-screen w-full ${screenBg}`}
           >
-            {/* Scrollable content with space for fixed nav */}
+            {/* Scrollable content with space for fixed nav/toast */}
             <div
               id="phone-scroll"
               key={pathname}
@@ -52,13 +52,20 @@ export default function PhoneFrame({
               style={{
                 overscrollBehavior: "contain",
                 paddingBottom:
-                  "calc(env(safe-area-inset-bottom, 0px) + 88px)", // room for nav/toast
+                  "calc(env(safe-area-inset-bottom, 0px) + 88px)",
               }}
             >
               {children}
             </div>
 
-            {/* Mobile BottomNav: fixed to viewport bottom */}
+            {/* 🔹 Overlay root (MOBILE): fixed to viewport */}
+            <div
+              id="overlay-root"
+              data-overlay-root
+              className="pointer-events-none fixed inset-0 z-[90]"
+            />
+
+            {/* BottomNav: fixed to viewport bottom (z below overlay) */}
             <div
               className="fixed inset-x-0 bottom-0 z-50"
               style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 8px)" }}
@@ -69,12 +76,12 @@ export default function PhoneFrame({
         </div>
       )}
 
-      {/** ---------- DESKTOP: phone shell + in-screen nav ---------- */}
+      {/* ---------- DESKTOP: phone shell + in-screen nav ---------- */}
       {isDesktop && (
         <div className="grid place-items-center min-h-screen">
           <div
             className={`relative ${bg} rounded-[3.2rem] p-2 shadow-[0_30px_70px_rgba(0,0,0,0.35)] ring-1 ring-black/20`}
-            style={{ width: 390, height: 780 }} // iPhone-ish logical size
+            style={{ width: 390, height: 780 }}
           >
             <div className="relative h-full w-full rounded-[2.6rem] bg-black/80 p-1">
               <div
@@ -85,12 +92,12 @@ export default function PhoneFrame({
                 {/* Dynamic Island / notch */}
                 <div className="absolute left-1/2 -translate-x-1/2 top-2 h-8 w-40 rounded-full bg-black/90" />
 
-                {/* Screen content */}
+                {/* Screen content (safe areas) */}
                 <div className="absolute inset-0 pt-12 pb-8">
                   <div
                     id="phone-scroll"
                     key={pathname}
-                    className="h-full w-full overflow-y-auto pb-20" // room for in-screen nav
+                    className="h-full w-full overflow-y-auto pb-20"
                     style={{ overscrollBehavior: "contain" }}
                   >
                     {children}
@@ -100,7 +107,14 @@ export default function PhoneFrame({
                   <div className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 h-1.5 w-28 rounded-full bg-black/20" />
                 </div>
 
-                {/* Desktop BottomNav: absolute inside the phone */}
+                {/* 🔹 Overlay root (DESKTOP): absolute inside phone screen */}
+                <div
+                  id="overlay-root"
+                  data-overlay-root
+                  className="pointer-events-none absolute inset-0 z-[90]"
+                />
+
+                {/* BottomNav: absolute inside the phone */}
                 <div className="absolute left-3 right-3 bottom-3 z-50">
                   <BottomNav active={tab} onChange={setTab} />
                 </div>

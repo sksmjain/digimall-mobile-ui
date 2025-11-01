@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Heart, MoreHorizontal, Star, Link2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Heart, MoreHorizontal, Star } from "lucide-react";
 import ProductGallery from "./ProductGallery";
-import WishToast, { type WishToastPayload } from "./WishToast"; // 👈 import toast
+import WishToast, { type WishToastPayload } from "./WishToast";
+import MenuPop from "./MenuPop"; // ✅ import MenuPop
 
 interface ColorOption { id: number; color: string; }
 interface SizeOption { id: number; label: string; }
@@ -33,10 +34,26 @@ export default function ProductPage() {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  // 🍎 WishToast state
-  const [toastItem, setToastItem] = React.useState<WishToastPayload | null>(null);
-  const [toastOpen, setToastOpen] = React.useState(false);
-  const showToast = (item: WishToastPayload) => { setToastItem(item); setToastOpen(true); };
+  // 🍏 WishToast state
+  const [toastItem, setToastItem] = useState<WishToastPayload | null>(null);
+  const [toastOpen, setToastOpen] = useState(false);
+  const showToast = (item: WishToastPayload) => { 
+    setToastItem(item);
+    setToastOpen(true);
+  };
+
+  // 🍎 MenuPop state
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const images = [
+    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Crimson.jpg?v=1718878184&width=1500",
+    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_97e5fbbe-690f-4fdf-8df2-a1e01cf4bc9b.jpg?v=1718878307&width=1500",
+    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_7.jpg?v=1718878307&width=1500",
+    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_4_bbfcb910-4292-4b68-a8e5-03149c530511.jpg?v=1718878307&width=1500"
+  ];
+
+  const productTitle = "Minimalist Sweatpants";
+  const primaryImage = images[0];
 
   useEffect(() => {
     const el = ref.current;
@@ -50,20 +67,11 @@ export default function ProductPage() {
     });
   }, []);
 
-  const images = [
-    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Crimson.jpg?v=1718878184&width=1500",
-    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_97e5fbbe-690f-4fdf-8df2-a1e01cf4bc9b.jpg?v=1718878307&width=1500",
-    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_7.jpg?v=1718878307&width=1500",
-    "https://cdn.shopify.com/s/files/1/0569/4029/8284/files/Untitleddesign_4_bbfcb910-4292-4b68-a8e5-03149c530511.jpg?v=1718878307&width=1500"
-  ];
-
-  const productTitle = "Minimalist Sweatpants";
-  const primaryImage = images[0];
-
   return (
     <>
-      <div ref={ref} className="flex flex-col gap-4 p-4">
-        {/* Top Store Header */}
+      <div ref={ref} className="flex flex-col gap-4">
+
+        {/* Store header */}
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="h-10 w-10 rounded-full bg-neutral-200" />
@@ -79,33 +87,34 @@ export default function ProductPage() {
           <button className="px-4 py-2 rounded-full bg-white shadow font-medium">Visit store</button>
         </div>
 
-        {/* Product Image */}
         <ProductGallery images={images} className="rounded-xl" />
 
-        {/* Title & Ratings */}
+        {/* Title + actions */}
         <div className="flex justify-between items-start">
           <div>
             <p className="text-lg font-semibold">{productTitle}</p>
             <div className="flex items-center gap-1 text-sm text-gray-700">
-              <Star className="h-4 w-4 fill-black text-black" />
-              <Star className="h-4 w-4 fill-black text-black" />
-              <Star className="h-4 w-4 fill-black text-black" />
-              <Star className="h-4 w-4 fill-black text-black" />
-              <Star className="h-4 w-4 fill-black text-black" />
+              {[1,2,3,4,5].map(i => (
+                <Star key={i} className="h-4 w-4 fill-black text-black" />
+              ))}
               <span className="ml-1 text-gray-500">4.9K ratings</span>
             </div>
           </div>
 
           <div className="flex gap-2">
-            {/* ❤️ Heart → show WishToast */}
+            {/* ❤️ Wishlist */}
             <button
               className="h-10 w-10 grid place-items-center rounded-full bg-white shadow"
               onClick={() => showToast({ title: productTitle, image: primaryImage })}
-              aria-label="Add to wishlist"
             >
               <Heart className="h-5 w-5" />
             </button>
-            <button className="h-10 w-10 grid place-items-center rounded-full bg-white shadow" aria-label="More">
+
+            {/* ⋯ Menu */}
+            <button
+              className="h-10 w-10 grid place-items-center rounded-full bg-white shadow"
+              onClick={() => setMenuOpen(true)}
+            >
               <MoreHorizontal className="h-5 w-5" />
             </button>
           </div>
@@ -126,7 +135,6 @@ export default function ProductPage() {
                 onClick={() => setActiveColor(c.id)}
                 className={`h-9 w-9 rounded-full border-2 transition ${activeColor === c.id ? "border-black" : "border-white"}`}
                 style={{ backgroundColor: c.color }}
-                aria-label={`Select color ${c.id}`}
               />
             ))}
           </div>
@@ -150,63 +158,26 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <button className="w-full bg-black text-white py-3 rounded-full font-semibold">Add to Bag</button>
-
-        {/* ---------- Details / Policy / Store Card ---------- */}
-        <section className="mt-6 space-y-3">
-          {/* Description */}
-          <div>
-            <h3 className="text-lg font-semibold">Description</h3>
-            <p className="mt-2 text-[15px] leading-6 text-foreground/80">
-              You asked for minimal, and now it's here. Our Minimalist Hoodie features a Super Soft Combed Cotton Blend,
-              a kangaroo pocket, and an oversized double-lined hood. Our hoodies are slightly weighted, which many customers
-              claim has helped wi... <button className="btn-text ml-1">View more</button>
-            </p>
-          </div>
-
-          {/* More details link */}
-          <button className="w-full rounded-full bg-foreground/5 text-foreground px-4 py-3 flex items-center justify-center gap-2 ring-1 ring-border">
-            <Link2 className="h-5 w-5" />
-            <span className="text-[15px] font-medium">More details at Comfrt</span>
-          </button>
-
-          {/* Refund policy */}
-          <button className="w-full rounded-full bg-foreground/5 text-foreground px-4 py-3 flex items-center justify-center ring-1 ring-border">
-            <span className="text-[15px] font-medium">Refund Policy</span>
-          </button>
-
-          {/* Store card */}
-          <div className="mt-2 overflow-hidden rounded-[26px] ring-1 ring-black/10">
-            <div className="relative h-36 w-full">
-              <img
-                src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=1600&auto=format&fit=crop"
-                alt="Comfrt promo"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4 flex items-center justify-between text-white">
-                <div>
-                  <p className="text-base font-semibold">Comfrt</p>
-                  <div className="mt-1 flex items-center gap-1 text-sm text-white/85">
-                    <Star className="h-4 w-4 fill-current" />
-                    <span>4.8</span>
-                    <span className="text-white/70">(200.8K)</span>
-                  </div>
-                </div>
-                <button className="rounded-full bg-white/90 text-black px-4 py-2 text-sm font-medium shadow">Follow</button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <button className="w-full bg-black text-white py-3 rounded-full font-semibold">
+          Add to Bag
+        </button>
       </div>
 
-      {/* 🍎 WishToast — appears above BottomNav (position handled inside component) */}
+      {/* ✅ Menu bottom sheet */}
+      <MenuPop
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        shopName="Comfrt"
+        logo="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=200"
+        rating={4.8}
+        ratingCount="200.8K"
+      />
+
+      {/* 🍏 Wish toast */}
       <WishToast
         open={toastOpen}
         item={toastItem}
         onClose={() => setToastOpen(false)}
-        // duration={1500} // optional tweak
       />
     </>
   );

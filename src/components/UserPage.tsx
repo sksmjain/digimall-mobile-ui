@@ -72,7 +72,7 @@ export default function UserPage() {
   };
 
   return (
-    <div className="px-4 pt-6 pb-28 text-black"> {/* extra bottom space so content doesn't sit under nav/toast */}
+    <div className="pt-6 pb-12 text-black"> {/* extra bottom space so content doesn't sit under nav/toast */}
       {/* Floating settings */}
       <button
         className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white/90 shadow ring-1 ring-black/10"
