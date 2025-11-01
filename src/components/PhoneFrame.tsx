@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { useState, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import { useState } from "react";
 import BottomNav from "./BottomNav";
 
 type PhoneFrameProps = PropsWithChildren<{
