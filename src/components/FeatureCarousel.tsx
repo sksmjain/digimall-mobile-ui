@@ -11,7 +11,7 @@ type FeatureItem = {
     return (
       <div className="w-full">
         <div
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none px-4"
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none px-4 mb-6"
         >
           {items.map((item, idx) => (
             <div key={idx} className="flex-shrink-0 snap-start w-[75%] sm:w-[45%] lg:w-[30%]">
