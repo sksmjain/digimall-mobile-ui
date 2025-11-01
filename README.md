@@ -11,6 +11,8 @@ Build the "Digital Mall" — where users browse brands, shop curated collections
 
 Think **Shop App × Pinterest × Amazon**.
 
+![Phone Preview](./public/banner.png)
+
 ---
 
 ## ✨ Features
