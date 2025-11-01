@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Heart, MoreHorizontal, Star, Link2 } from "lucide-react";
 import ProductGallery from "./ProductGallery";
-import { useLocation } from "react-router-dom";
 import WishToast, { type WishToastPayload } from "./WishToast"; // 👈 import toast
 
 interface ColorOption { id: number; color: string; }
