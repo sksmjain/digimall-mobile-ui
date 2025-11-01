@@ -1,6 +1,6 @@
 import { SlidersHorizontal, ChevronDown } from "lucide-react";
 import SearchUI from "./ui/Search";
-import Button from "./ui/button";
+import Button from "./ui/Button";
 /**
  * StoreControl — product listing controls with categories and filters
  * Tailwind + React, no external UI framework

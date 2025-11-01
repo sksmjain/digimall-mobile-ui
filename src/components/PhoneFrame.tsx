@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import BottomNav from "./BottomNav";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ type PhoneFrameProps = {
     bg = "bg-black",
     screenBg = "bg-white",
   }: PhoneFrameProps) {
+    const { pathname } = useLocation();
     const [tab, setTab] = useState<"home" | "orders" | "profile">("home");
     
     return (
@@ -36,7 +38,12 @@ type PhoneFrameProps = {
               {/* Screen content (safe areas) */}
               <div className="absolute inset-0 pt-12 pb-8">
                 {/* Scrollable app area */}
-                <div className="h-full w-full overflow-y-auto">
+                <div
+                id="phone-scroll"
+                key={pathname}
+                className="h-full w-full overflow-y-auto"
+                style={{ overscrollBehavior: "contain" }}
+              >
                   {children}
                 </div>
   
