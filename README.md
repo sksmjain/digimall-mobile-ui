@@ -62,5 +62,12 @@ Planned integrations:
 
 ---
 
+## Stying Foundation
+UX Enhancements
+* Hidden scrollbars (scrollbar-hide)
+* iOS momentum scroll (-webkit-overflow-scrolling: touch)
+* Micro-animation curves (ease-out, overshoot)
+* Components animate like iOS sheets/toasts
+---
 ## 📂 Project Structure
 
