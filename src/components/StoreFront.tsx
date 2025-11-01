@@ -21,7 +21,7 @@ interface StoreFrontProps {
  */
 export default function StoreFront({ title = "For you", items, onSeeAll }: StoreFrontProps) {
   return (
-    <section className="w-full">
+    <section className="w-full mb-6">
       <div className="rounded-[28px] bg-[oklch(0.62_0.03_180)] text-white/95 p-5 sm:p-6 md:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
