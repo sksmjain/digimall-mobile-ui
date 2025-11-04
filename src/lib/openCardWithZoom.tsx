@@ -1,7 +1,7 @@
 // src/lib/openProductCardWithZoom.ts
 import type { NavigateFunction } from "react-router-dom";
 
-export function openProductCardWithZoom(
+export function openCardWithZoom(
   cardEl: HTMLElement,
   to: string,
   navigate: NavigateFunction

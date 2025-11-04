@@ -1,7 +1,9 @@
 // src/components/StoreFront.tsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Heart } from "lucide-react";
 import WishToast, { type WishToastPayload } from "./WishToast";
+import { openCardWithSlide } from "@/lib/openCardWithSlide";
 
 export type StoreFrontItem = {
   id: string | number;
@@ -16,7 +18,8 @@ interface StoreFrontProps {
   onSeeAll?: () => void;
 }
 
-export default function StoreFront({ title = "For you", items, onSeeAll }: StoreFrontProps) {
+export default function StoreFront({ title = "For you", items }: StoreFrontProps) {
+  const navigate = useNavigate();
   // ---- WishToast state ----
   const [toastItem, setToastItem] = React.useState<WishToastPayload | null>(null);
   const [toastOpen, setToastOpen] = React.useState(false);
@@ -38,7 +41,7 @@ export default function StoreFront({ title = "For you", items, onSeeAll }: Store
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-3xl font-semibold tracking-tight">{title}</h2>
           <button
-            onClick={onSeeAll}
+            onClick={() => (openCardWithSlide(navigate, "/products"))}
             className="h-10 w-10 grid place-items-center rounded-full bg-white/15 ring-1 ring-white/20 backdrop-blur hover:bg-white/20 transition"
             aria-label="See all"
           >

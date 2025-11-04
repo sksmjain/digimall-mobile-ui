@@ -69,7 +69,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <div ref={ref} className="flex flex-col gap-4">
+      <div ref={ref} className="flex flex-col gap-4 p-4 pb-28">
 
         {/* Store header */}
         <div className="flex justify-between items-center">

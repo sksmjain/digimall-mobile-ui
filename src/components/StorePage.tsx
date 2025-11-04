@@ -55,12 +55,12 @@ export default function StorePage() {
       ];
 
     return (
-         <>
+         <div className="p-4 pb-28">
             <StoreHero image="https://cdn.shopify.com/shop-assets/shopify_brokers/comfrtclothing.myshopify.com/1725050789/DSC00791copy1.jpeg?crop=region&crop_left=0&crop_top=77&crop_width=2160&crop_height=1358&width=1000" logoImage="https://cdn.shopify.com/shop-assets/shopify_brokers/comfrtclothing.myshopify.com/1725047086/Untitleddesign1.png?crop=region&crop_left=0&crop_top=49&crop_width=1125&crop_height=277&width=640" />
             <StoreControl name="Comfrt" bgColor="white" productCount={692} />
             <FeatureCarousel items={sections} />
             <StoreFront items={items} onSeeAll={() => console.log("see all")} />
             <StoreProducts products={products} currency="$" onFav={(id) => console.log("fav", id)} />
-         </>
+         </div>
     )
 }

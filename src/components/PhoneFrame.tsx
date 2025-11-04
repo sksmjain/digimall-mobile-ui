@@ -51,8 +51,9 @@ export default function PhoneFrame({
               className="min-h-screen w-full overflow-y-auto"
               style={{
                 overscrollBehavior: "contain",
+                // pages can override via: style={{ '--dock-space': '0px' }}
                 paddingBottom:
-                  "calc(env(safe-area-inset-bottom, 0px) + 88px)",
+                  "var(--dock-space, calc(env(safe-area-inset-bottom, 0px) + 0px))",
               }}
             >
               {children}
@@ -93,12 +94,23 @@ export default function PhoneFrame({
                 <div className="absolute left-1/2 -translate-x-1/2 top-2 h-8 w-40 rounded-full bg-black/90" />
 
                 {/* Screen content (safe areas) */}
-                <div className="absolute inset-0 pt-12 pb-8">
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    // pages can tweak: --frame-pad-top / --frame-pad-bottom
+                    paddingTop: "var(--frame-pad-top, 3rem)",
+                    paddingBottom: "var(--frame-pad-bottom, 2rem)",
+                  }}
+                >
                   <div
                     id="phone-scroll"
                     key={pathname}
-                    className="h-full w-full overflow-y-auto pb-20"
-                    style={{ overscrollBehavior: "contain" }}
+                    className="h-full w-full overflow-y-auto"
+                    style={{
+                      overscrollBehavior: "contain",
+                      // reserve space for in-screen BottomNav; pages can override to 0
+                      paddingBottom: "var(--dock-space, 5rem)",
+                    }}
                   >
                     {children}
                   </div>

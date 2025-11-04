@@ -1,5 +1,5 @@
 
-import { openProductCardWithZoom } from "../lib/openProductWithZoom";
+import { openCardWithZoom } from "../lib/openCardWithZoom";
 import { Heart, Star } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +68,7 @@ function ProductCard({
   const handleOpen = () => {
     const cardEl = cardRef.current;
     if (!cardEl) return navigate(`/product/${p.id}`);
-    openProductCardWithZoom(cardEl, `/product/${p.id}`, navigate);
+    openCardWithZoom(cardEl, `/product/${p.id}`, navigate);
   };
 
   const price = formatPrice(p.price, currency);

@@ -314,3 +314,23 @@
   60% { transform: translate(-50%, -2px) scale(1.02); opacity: 1; }
   100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
 }
+
+@keyframes route-card-in-right {
+  0%   { transform: translateX(32%); opacity: .88; filter: saturate(.98); }
+  80%  { transform: translateX(-2%); }          /* tiny overshoot */
+  100% { transform: translateX(0); opacity: 1; filter: none; }
+}
+.animate-route-card-in {
+  animation: route-card-in-right .28s cubic-bezier(.2,.8,.2,1);
+  /* subtle “card” feel */
+  border-radius: inherit;
+  box-shadow: 0 14px 40px rgba(0,0,0,.16);
+  background: var(--color-background);
+}
+
+/* optional: loop sheen every few seconds */
+@keyframes glass-sheen {
+  0% { transform: translateX(-120%); opacity: 0; }
+  50% { opacity: .45; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
